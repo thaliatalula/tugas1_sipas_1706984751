@@ -23,6 +23,9 @@ public class DiagnosisPenyakitModel implements Serializable {
     @Column(name = "kodePenyakit", nullable = false)
     private String kodePenyakit;
 
+    @OneToMany(mappedBy = "diagnosisPenyakit")
+    private PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit;
+
     public BigInteger getIdPenyakit() {
         return idPenyakit;
     }

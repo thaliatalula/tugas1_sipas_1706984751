@@ -16,6 +16,48 @@ public class PasienModel implements Serializable {
     @Size(max = 20)
     private BigInteger idPasien;
 
+    @NotNull
+    @Column(name = "namaPasien", nullable = false)
+    private String namaPasien;
+
+    @NotNull
+    @Column(name = "kodePasien", nullable = false)
+    private String kodePasien;
+
+    @NotNull
+    @Column(name = "NIKPasien", nullable = false)
+    private String NIKPasien;
+
+    @NotNull
+    @Column(name = "tglLahir", nullable = false)
+    private Date tglLahir;
+
+    @NotNull
+    @Column(name = "tempatLahir", nullable = false)
+    private String tempatLahir;
+
+    @NotNull
+    @Column(name = "jenisKelamin", nullable = false)
+    private String jenisKelamin;
+
+    @OneToOne
+    @JoinColumn(name = "idEmergencyContact", referencedColumnName = "idEmergencyContact", nullable = false)
+    private EmergencyContactModel emergencyContact;
+
+    @OneToMany(mappedBy = "pasien")
+    private PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit;
+
+    @OneToMany(mappedBy = "pasien")
+    private PasienAsuransiModel pasienAsuransi;
+
+    public BigInteger getIdPasien() {
+        return idPasien;
+    }
+
+    public void setIdPasien(BigInteger idPasien) {
+        this.idPasien = idPasien;
+    }
+
     public String getNamaPasien() {
         return namaPasien;
     }
@@ -63,28 +105,4 @@ public class PasienModel implements Serializable {
     public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
-
-    @NotNull
-    @Column(name = "namaPasien", nullable = false)
-    private String namaPasien;
-
-    @NotNull
-    @Column(name = "kodePasien", nullable = false)
-    private String kodePasien;
-
-    @NotNull
-    @Column(name = "NIKPasien", nullable = false)
-    private String NIKPasien;
-
-    @NotNull
-    @Column(name = "tglLahir", nullable = false)
-    private Date tglLahir;
-
-    @NotNull
-    @Column(name = "tempatLahir", nullable = false)
-    private String tempatLahir;
-
-    @NotNull
-    @Column(name = "jenisKelamin", nullable = false)
-    private String jenisKelamin;
 }

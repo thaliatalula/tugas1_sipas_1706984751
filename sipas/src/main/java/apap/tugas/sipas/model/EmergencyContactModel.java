@@ -23,6 +23,9 @@ public class EmergencyContactModel implements Serializable {
     @Column(name = "namaEmergencyContact", nullable = false)
     private String namaEmergencyContact;
 
+    @OneToOne(mappedBy = "emergencyContact")
+    private PasienModel pasien;
+
     public BigInteger getIdEmergencyContact() {
         return idEmergencyContact;
     }

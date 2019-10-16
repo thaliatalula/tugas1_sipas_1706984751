@@ -23,6 +23,9 @@ public class AsuransiModel implements Serializable {
     @Column(name = "jenisAsuransi", nullable = false)
     private String jenisAsuransi;
 
+    @OneToMany(mappedBy = "asuransi")
+    private PasienAsuransiModel pasienAsuransi;
+
     public BigInteger getIdAsuransi() {
         return idAsuransi;
     }
