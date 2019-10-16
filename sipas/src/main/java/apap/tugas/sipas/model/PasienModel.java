@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "pasien")
@@ -14,7 +15,7 @@ public class PasienModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(max = 20)
-    private BigInteger idPasien;
+    private Long idPasien;
 
     @NotNull
     @Column(name = "namaPasien", nullable = false)
@@ -38,23 +39,23 @@ public class PasienModel implements Serializable {
 
     @NotNull
     @Column(name = "jenisKelamin", nullable = false)
-    private String jenisKelamin;
+    private Integer jenisKelamin;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEmergencyContact", referencedColumnName = "idEmergencyContact", nullable = false)
     private EmergencyContactModel emergencyContact;
 
-    @OneToMany(mappedBy = "pasien")
-    private PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit;
+    @OneToMany(mappedBy = "pasien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PasienDiagnosisPenyakitModel> listPasienDiagnosisPenyakit;
 
-    @OneToMany(mappedBy = "pasien")
-    private PasienAsuransiModel pasienAsuransi;
+    @OneToMany(mappedBy = "pasien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PasienAsuransiModel> listPasienAsuransi;
 
-    public BigInteger getIdPasien() {
+    public Long getIdPasien() {
         return idPasien;
     }
 
-    public void setIdPasien(BigInteger idPasien) {
+    public void setIdPasien(Long idPasien) {
         this.idPasien = idPasien;
     }
 
@@ -98,11 +99,35 @@ public class PasienModel implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    public String getJenisKelamin() {
+    public Integer getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(String jenisKelamin) {
+    public void setJenisKelamin(Integer jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
+    }
+
+    public EmergencyContactModel getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(EmergencyContactModel emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public List<PasienDiagnosisPenyakitModel> getListPasienDiagnosisPenyakit() {
+        return listPasienDiagnosisPenyakit;
+    }
+
+    public void setListPasienDiagnosisPenyakit(List<PasienDiagnosisPenyakitModel> listPasienDiagnosisPenyakit) {
+        this.listPasienDiagnosisPenyakit = listPasienDiagnosisPenyakit;
+    }
+
+    public List<PasienAsuransiModel> getListPasienAsuransi() {
+        return listPasienAsuransi;
+    }
+
+    public void setListPasienAsuransi(List<PasienAsuransiModel> listPasienAsuransi) {
+        this.listPasienAsuransi = listPasienAsuransi;
     }
 }

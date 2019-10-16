@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "diagnosisPenyakit")
@@ -13,24 +14,32 @@ public class DiagnosisPenyakitModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(max = 20)
-    private BigInteger idPenyakit;
+    private Long idPenyakit;
 
     @NotNull
-    @Column(name = "namaPenyakit, nullable = false")
+    @Column(name = "namaPenyakit", nullable = false)
     private String namaPenyakit;
 
     @NotNull
     @Column(name = "kodePenyakit", nullable = false)
     private String kodePenyakit;
 
-    @OneToMany(mappedBy = "diagnosisPenyakit")
-    private PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit;
+    @OneToMany(mappedBy = "diagnosisPenyakit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PasienDiagnosisPenyakitModel> listPasienDiagnosisPenyakit;
 
-    public BigInteger getIdPenyakit() {
+    public List<PasienDiagnosisPenyakitModel> getListPasienDiagnosisPenyakit() {
+        return listPasienDiagnosisPenyakit;
+    }
+
+    public void setListPasienDiagnosisPenyakit(List<PasienDiagnosisPenyakitModel> listPasienDiagnosisPenyakit) {
+        this.listPasienDiagnosisPenyakit = listPasienDiagnosisPenyakit;
+    }
+
+    public Long getIdPenyakit() {
         return idPenyakit;
     }
 
-    public void setIdPenyakit(BigInteger idPenyakit) {
+    public void setIdPenyakit(Long idPenyakit) {
         this.idPenyakit = idPenyakit;
     }
 

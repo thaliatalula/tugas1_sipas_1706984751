@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "asuransi")
@@ -13,7 +14,7 @@ public class AsuransiModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(max = 20)
-    private BigInteger idAsuransi;
+    private Long idAsuransi;
 
     @NotNull
     @Column(name = "namaAsuransi", nullable = false)
@@ -23,14 +24,14 @@ public class AsuransiModel implements Serializable {
     @Column(name = "jenisAsuransi", nullable = false)
     private String jenisAsuransi;
 
-    @OneToMany(mappedBy = "asuransi")
-    private PasienAsuransiModel pasienAsuransi;
+    @OneToMany(mappedBy = "asuransi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PasienAsuransiModel> listPasienAsuransi;
 
-    public BigInteger getIdAsuransi() {
+    public Long getIdAsuransi() {
         return idAsuransi;
     }
 
-    public void setIdAsuransi(BigInteger idAsuransi) {
+    public void setIdAsuransi(Long idAsuransi) {
         this.idAsuransi = idAsuransi;
     }
 
@@ -48,5 +49,13 @@ public class AsuransiModel implements Serializable {
 
     public void setJenisAsuransi(String jenisAsuransi) {
         this.jenisAsuransi = jenisAsuransi;
+    }
+
+    public List<PasienAsuransiModel> getListPasienAsuransi() {
+        return listPasienAsuransi;
+    }
+
+    public void setListPasienAsuransi(List<PasienAsuransiModel> listPasienAsuransi) {
+        this.listPasienAsuransi = listPasienAsuransi;
     }
 }

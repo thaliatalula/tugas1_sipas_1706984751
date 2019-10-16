@@ -13,7 +13,7 @@ public class EmergencyContactModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(max = 20)
-    private BigInteger idEmergencyContact;
+    private Long idEmergencyContact;
 
     @NotNull
     @Column(name = "NIKEmergencyContact", nullable = false)
@@ -23,14 +23,18 @@ public class EmergencyContactModel implements Serializable {
     @Column(name = "namaEmergencyContact", nullable = false)
     private String namaEmergencyContact;
 
-    @OneToOne(mappedBy = "emergencyContact")
+    @NotNull
+    @Column(name = "noTelp", nullable = false)
+    private String noTelp;
+
+    @OneToOne(mappedBy = "emergencyContact", cascade = CascadeType.ALL)
     private PasienModel pasien;
 
-    public BigInteger getIdEmergencyContact() {
+    public Long getIdEmergencyContact() {
         return idEmergencyContact;
     }
 
-    public void setIdEmergencyContact(BigInteger idEmergencyContact) {
+    public void setIdEmergencyContact(Long idEmergencyContact) {
         this.idEmergencyContact = idEmergencyContact;
     }
 
@@ -58,7 +62,11 @@ public class EmergencyContactModel implements Serializable {
         this.noTelp = noTelp;
     }
 
-    @NotNull
-    @Column(name = "noTelp", nullable = false)
-    private String noTelp;
+    public PasienModel getPasien() {
+        return pasien;
+    }
+
+    public void setPasien(PasienModel pasien) {
+        this.pasien = pasien;
+    }
 }
