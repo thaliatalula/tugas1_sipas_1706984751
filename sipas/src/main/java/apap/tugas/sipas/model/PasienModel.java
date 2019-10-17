@@ -39,7 +39,7 @@ public class PasienModel implements Serializable {
 
     @NotNull
     @Column(name = "jenisKelamin", nullable = false)
-    private Integer jenisKelamin;
+    private String jenisKelamin;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEmergencyContact", referencedColumnName = "idEmergencyContact", nullable = false)
@@ -99,11 +99,11 @@ public class PasienModel implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    public Integer getJenisKelamin() {
+    public String getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(Integer jenisKelamin) {
+    public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
 
