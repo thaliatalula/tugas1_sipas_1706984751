@@ -9,14 +9,48 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <div class="container-fluid">
-        <h2>Detail Data Pasien</h2>
-        <h3 th:text="'Nama: ' + ${pasien.namaPasien}"></h3>
-        <h3 th:text="'NIK: ' + ${pasien.NIKPasien}"></h3>
-        <h3 th:text="'Kode: ' + ${pasien.jenisKelamin}"></h3>
-        <h3 th:text="'Jenis Kelamin: ' + ${pasien.kodePasien}"></h3>
-        <h3 th:text="'Tanggal Lahir: ' + ${pasien.tempatLahir}"></h3>
-        <h3 th:text="'Tempat Lahir: ' + ${pasien.tglLahir}"></h3>
-        <h3 th:text="'Emergency Contact: ' + ${pasien.emergencyContact.noTelp}"></h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Detail Data Pasien</div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <tbody>
+                            <h3 th:text="'Nama: ' + ${pasien.namaPasien}"></h3>
+                            <h3 th:text="'NIK: ' + ${pasien.nikPasien}"></h3>
+                            <h3 th:text="'Kode: ' + ${pasien.jenisKelamin}"></h3>
+                            <h3 th:text="'Jenis Kelamin: ' + ${pasien.kodePasien}"></h3>
+                            <h3 th:text="'Tanggal Lahir: ' + ${pasien.tempatLahir}"></h3>
+                            <h3 th:text="'Tempat Lahir: ' + ${pasien.tglLahir}"></h3>
+                            <h3 th:text="'Emergency Contact: ' + ${pasien.emergencyContact.noTelp}"></h3>
+                        </tbody>
+                        <!--</div>-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>No</th>-->
+                            <!--<th>Nama</th>-->
+                            <!--<th>NIK</th>-->
+                            <!--<th>Jenis Kelamin</th>-->
+                            <!--<th>Kode Pasien</th>-->
+                            <!--<th>Tempat Lahir</th>-->
+                            <!--<th>Tanggal Lahir</th>-->
+                            <!--<th>Telepon Emergency</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.namaPasien}"></td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.NIKPasien}">k</td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.jenisKelamin}"></td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.kodePasien}"></td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.tglLahir}"></td>-->
+                            <!--<td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>-->
+                        <!--</tbody>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </body>
 </html>

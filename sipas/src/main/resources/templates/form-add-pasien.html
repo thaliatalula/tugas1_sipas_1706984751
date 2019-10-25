@@ -8,64 +8,67 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h3> Tambah Pasien </h3>
     <div class="container">
+        <div class="col-md-6">
+        <h3> Tambah Pasien </h3>
         <form th:action="@{/pasien/tambah/berhasil}" th:object="${pasien}" method="POST">
-            <!--<input type="hidden" th:field="*{idPasien}">-->
             <table class="table order-list">
                 <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>NIK</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Tempat Lahir</th>
-                    <th>Asuransi</th>
-                    <th>Emergency Contact Name</th>
-                    <th>Emergency Contact NIK</th>
-                    <th>Emergency Contact Phone</th>
-                </tr>
+                    <tr>
+                        <th>Nama</th>
+                        <td><input th:field="${pasien.namaPasien}"/></td>
+                    </tr>
+                    <tr>
+                        <th>NIK</th>
+                        <td><input th:field="${pasien.nikPasien}"/></td>
+                    </tr>
+                    <tr>
+                        <th>Jenis Kelamin</th>
+                        <td>
+                            <select th:field="${pasien.jenisKelamin}">
+                                <option th:value="1">Laki laki</option>
+                                <option th:value="2">Perempuan</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Lahir</th>
+                        <td><input th:field="${pasien.tglLahir}" type="date"/></td>
+                    </tr>
+                    <tr>
+                        <th>Tempat Lahir</th>
+                        <td><input th:field="${pasien.tempatLahir}"/></td>
+                    </tr>
+                    <tr>
+                        <th>Asuransi</th>
+                        <td>
+                            <select>
+                                <option th:each="asuransi, iterationStatus : ${listAsuransi}">
+                                    <a th:text="${asuransi.namaAsuransi}"></a>
+                                </option>
+                            </select>
+                            <br><br>
+                            <button class="btn btn-light" name="tambahAsuransi"/> Tambah Asuransi </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Emergency Contact Name</th>
+                        <td><input th:field="${emergencyContact.namaEmergencyContact}" /></td>
+                    </tr>
+                    <tr>
+                        <th>Emergency Contact NIK</th>
+                        <td><input th:field="${emergencyContact.NIKEmergencyContact}"/></td>
+                    </tr>
+                    <tr>
+                        <th>Emergency Contact Phone</th>
+                        <td><input th:field="${emergencyContact.noTelp}"/></td>
+                    </tr>
                 </thead>
-                <tbody>
-                    <td>
-                        <input type="text" name = "nama"/>
-                    </td>
-                    <td>
-                        <input type="text" name = "nik"/>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Laki laki</option>
-                            <option>Perempuan</option>
-                        </select>
-                        <!--<input type="number" name = "jenisKelamin"/>-->
-                    </td>
-                    <td>
-                        <input type="date" name = "tglLahir"/>
-                    </td>
-                    <td>
-                        <input type="text" name = "tempatLahir" />
-                    </td>
-                    <td>
-                        <select>
-                            <option th:each="asuransi, iterationStatus : ${listAsuransi}">
-                                <a th:text="${asuransi.namaAsuransi}"></a>
-                            </option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="ecName" />
-                    </td>
-                    <td>
-                        <input type="text" name="ecNIK"/>
-                    </td>
-                    <td>
-                        <input type="text" name="ecTelp"/>
-                    </td>
-                </tbody>
+                <tbody></tbody>
             </table>
-            <button class="btn btn-primary" type="submit" name="submitMenu"> Submit </button>
+            <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
         </form>
+    </div>
     </div>
 </body>
 </html>

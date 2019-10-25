@@ -16,7 +16,6 @@ public class PasienAsuransiModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Size(max = 20)
     private Long idPasienAsuransi;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

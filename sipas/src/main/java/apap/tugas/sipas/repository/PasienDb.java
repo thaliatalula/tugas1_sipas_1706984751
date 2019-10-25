@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface PasienDb extends JpaRepository<PasienModel, Long> {
-//    Optional<PasienModel> findByNIKPasien(Long NIKPasien);
+    Optional<PasienModel> findByNikPasien(String nikPasien);
 }

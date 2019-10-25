@@ -11,8 +11,6 @@ import java.math.BigInteger;
 public class EmergencyContactModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    @Size(max = 20)
     private Long idEmergencyContact;
 
     @NotNull

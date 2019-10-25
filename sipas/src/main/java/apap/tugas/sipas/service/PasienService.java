@@ -11,6 +11,5 @@ public interface PasienService {
     //method untuk menambah pasien baru
     void addPasien(PasienModel pasien);
     //method untuk melihat data pasien sesuai nik
-//    Optional<PasienModel> getPasienByNIKPasien(Long NIKPasien);
-
+    Optional<PasienModel> getPasienByNikPasien(String nikPasien);
 }

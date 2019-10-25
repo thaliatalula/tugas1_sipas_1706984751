@@ -1,10 +1,12 @@
 package apap.tugas.sipas.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +15,6 @@ import java.util.List;
 public class PasienModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    @Size(max = 20)
     private Long idPasien;
 
     @NotNull
@@ -26,11 +26,12 @@ public class PasienModel implements Serializable {
     private String kodePasien;
 
     @NotNull
-    @Column(name = "NIKPasien", nullable = false)
-    private String NIKPasien;
+    @Column(name = "nikPasien", nullable = false)
+    private String nikPasien;
 
     @NotNull
     @Column(name = "tglLahir", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tglLahir;
 
     @NotNull
@@ -39,7 +40,7 @@ public class PasienModel implements Serializable {
 
     @NotNull
     @Column(name = "jenisKelamin", nullable = false)
-    private String jenisKelamin;
+    private Integer jenisKelamin;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEmergencyContact", referencedColumnName = "idEmergencyContact", nullable = false)
@@ -50,6 +51,27 @@ public class PasienModel implements Serializable {
 
     @OneToMany(mappedBy = "pasien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PasienAsuransiModel> listPasienAsuransi;
+
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final SecureRandom RANDOM = new SecureRandom();
+
+    //random string
+    public static String randomString(int count) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; ++i) {
+            sb.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+        }
+        return sb.toString();
+    }
+
+    public void buatKode(PasienModel pasien) {
+        String pattern = "ddMMyyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        String tanggal = dateFormat.format(pasien.getTglLahir());
+        Integer jenisKelamin = pasien.getJenisKelamin();
+        String kode = "2024" + tanggal + jenisKelamin + randomString(2);
+        pasien.setKodePasien(kode);
+    }
 
     public Long getIdPasien() {
         return idPasien;
@@ -75,12 +97,12 @@ public class PasienModel implements Serializable {
         this.kodePasien = kodePasien;
     }
 
-    public String getNIKPasien() {
-        return NIKPasien;
+    public String getNikPasien() {
+        return nikPasien;
     }
 
-    public void setNIKPasien(String NIKPasien) {
-        this.NIKPasien = NIKPasien;
+    public void setNikPasien(String nikPasien) {
+        this.nikPasien = nikPasien;
     }
 
     public Date getTglLahir() {
@@ -99,11 +121,11 @@ public class PasienModel implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    public String getJenisKelamin() {
+    public Integer getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(String jenisKelamin) {
+    public void setJenisKelamin(Integer jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
 

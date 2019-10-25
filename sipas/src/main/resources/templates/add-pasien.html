@@ -8,6 +8,6 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2>Pasien berhasil ditambahkan</h2>
+    <h2 th:text="'Pasien ' + ${pasien.namaPasien} + ' dengan kode pasien ' + ${pasien.kodePasien} + ' berhasil ditambahkan'"></h2>
 </body>
 </html>

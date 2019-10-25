@@ -9,6 +9,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container-fluid">
+    <br>
     <center><h2>Sistem Informasi Pasien</h2></center>
     <br>
     <button class="btn btn-primary">
@@ -16,7 +17,7 @@
     </button>
     <hr>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Daftar Pasien</div>
                 <div class="card-body">
@@ -37,17 +38,17 @@
                             <tr th:each="pasien, iterationStatus : *{listPasien}">
                                 <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
                                 <td style="text-align: center;" th:text="${pasien.namaPasien}"></td>
-                                <td style="text-align: center;" th:text="${pasien.NIKPasien}">k</td>
+                                <td style="text-align: center;" th:text="${pasien.nikPasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.jenisKelamin}"></td>
                                 <td style="text-align: center;" th:text="${pasien.kodePasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tglLahir}"></td>
                                 <td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>
                                 <td><button class="btn btn-dark">
-                                    <a th:href="@{/}" style="color: white">Tambah Diagnosis</a>
+                                    <a th:action="@{/}" methods="GET" style="color: white">Tambah Diagnosis</a>
                                 </button></td>
                                 <td><button class="btn btn-primary">
-                                    <a th:href="@{/}" style="color: white">Lihat</a>
+                                    <a th:href="@{/pasien(nikPasien=${pasien.nikPasien})}" style="color: white">Lihat</a>
                                 </button></td>
                                 <td><button class="btn btn-dark">
                                     <a th:href="@{/}" style="color: white">Ubah</a>

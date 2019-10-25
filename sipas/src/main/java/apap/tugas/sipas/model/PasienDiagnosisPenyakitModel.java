@@ -17,7 +17,6 @@ public class PasienDiagnosisPenyakitModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Size(max = 20)
     private Long idPasienDiagnosisPenyakit;
 
     @NotNull

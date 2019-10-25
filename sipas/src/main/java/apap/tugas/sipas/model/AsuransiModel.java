@@ -13,7 +13,7 @@ public class AsuransiModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Size(max = 20)
+
     private Long idAsuransi;
 
     @NotNull
