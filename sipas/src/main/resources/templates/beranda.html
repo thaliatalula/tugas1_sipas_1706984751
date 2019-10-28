@@ -19,19 +19,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Daftar Pasien</div>
+                <div class="card-header bg-dark text-white">Daftar Pasien</div>
                 <div class="card-body">
                     <table class="table order-list">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>NIK</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Kode Pasien</th>
-                                <th>Tempat Lahir</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Telepon Emergency</th>
+                                <th style="text-align: center;">No</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">NIK</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
+                                <th style="text-align: center;">Kode Pasien</th>
+                                <th style="text-align: center;">Tempat Lahir</th>
+                                <th style="text-align: center;">Tanggal Lahir</th>
+                                <th style="text-align: center;">Telepon Emergency</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,7 @@
                                 <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
                                 <td style="text-align: center;" th:text="${pasien.namaPasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.nikPasien}"></td>
-                                <td style="text-align: center;" th:text="${pasien.jenisKelamin}"></td>
+                                <td style="text-align: center;" th:text="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></td>
                                 <td style="text-align: center;" th:text="${pasien.kodePasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tglLahir}"></td>
@@ -51,7 +51,7 @@
                                     <a th:href="@{/pasien(nikPasien=${pasien.nikPasien})}" style="color: white">Lihat</a>
                                 </button></td>
                                 <td><button class="btn btn-dark">
-                                    <a th:href="@{/}" style="color: white">Ubah</a>
+                                    <a th:href="@{/pasien/ubah/} + ${pasien.nikPasien   }" style="color: white">Ubah</a>
                                 </button></td>
                                 <td><button class="btn btn-danger">
                                     <a th:href="@{/}" style="color: white">Hapus</a>

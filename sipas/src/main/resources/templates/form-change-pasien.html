@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeLeaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Form Change Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
+
 <body>
-$END$
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="col-md-6">
+        <br>
+        <h3> Ubah Pasien </h3>
+        <form th:action="@{/pasien/ubah/berhasil}" th:object="${pasien}" method="POST">
+            <table class="table order-list">
+                <thead>
+                <tr>
+                    <th>Nama</th>
+                    <td><input th:value="${pasien.namaPasien}" th:field="${pasien.namaPasien}"/></td>
+                </tr>
+                <tr>
+                    <th>NIK</th>
+                    <td><input th:value="${pasien.nikPasien}" th:filed="${pasien.nikPasien}" disabled/></td>
+                </tr>
+                <tr>
+                    <th>Jenis Kelamin</th>
+                    <td><input th:value="${pasien.jenisKelamin}" th:field="${pasien.jenisKelamin}"/></td>
+                </tr>
+                <tr>
+                    <th>Tanggal Lahir</th>
+                    <td><input th:value="${pasien.tglLahir}" th:field="${pasien.tglLahir}" type="date"/></td>
+                </tr>
+                <tr>
+                    <th>Tempat Lahir</th>
+                    <td><input th:value="${pasien.tempatLahir}" th:field="${pasien.tempatLahir}"/></td>
+                </tr>
+                <tr>
+                    <th>Asuransi</th>
+                    <td>APA YAA</td>
+<!--                    <td><input th:value="${pasien.asuransi}"></td>-->
+                </tr>
+                <tr>
+                    <th>Emergency Contact Name</th>
+                    <td><input th:value="${pasien.emergencyContact.namaEmergencyContact}" th:field="${pasien.emergencyContact.namaEmergencyContact}" /></td>
+                </tr>
+                <tr>
+                    <th>Emergency Contact NIK</th>
+                    <td><input th:value="${pasien.emergencyContact.NIKEmergencyContact}" th:field="${pasien.emergencyContact.NIKEmergencyContact}"/></td>
+                </tr>
+                <tr>
+                    <th>Emergency Contact Phone</th>
+                    <td><input th:value="${pasien.emergencyContact.noTelp}" th:field="${pasien.emergencyContact.noTelp}"/></td>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

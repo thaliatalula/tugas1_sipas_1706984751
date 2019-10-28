@@ -16,7 +16,6 @@ import java.util.Date;
 public class PasienDiagnosisPenyakitModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long idPasienDiagnosisPenyakit;
 
     @NotNull

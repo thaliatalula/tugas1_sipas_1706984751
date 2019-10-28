@@ -15,7 +15,6 @@ import java.math.BigInteger;
 public class PasienAsuransiModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long idPasienAsuransi;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

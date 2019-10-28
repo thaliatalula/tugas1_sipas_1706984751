@@ -12,6 +12,7 @@
         <div class="col-md-6">
         <h3> Tambah Pasien </h3>
         <form th:action="@{/pasien/tambah/berhasil}" th:object="${pasien}" method="POST">
+            <input type="hidden" th:field="${pasien.idPasien}"/>
             <table class="table order-list">
                 <thead>
                     <tr>
@@ -42,9 +43,8 @@
                     <tr>
                         <th>Asuransi</th>
                         <td>
-                            <select>
-                                <option th:each="asuransi, iterationStatus : ${listAsuransi}">
-                                    <a th:text="${asuransi.namaAsuransi}"></a>
+                            <select th:each="pasienAsuransi, iterationStat : *{listPasienAsuransi}" th:field="*{listPasienAsuransi[__${iterationStat.index}__].asuransi}">
+                                <option th:each="asuransi, iterationStatus : ${listAsuransi}" th:text="${asuransi.namaAsuransi}" th:value="${asuransi.idAsuransi}">
                                 </option>
                             </select>
                             <br><br>
@@ -53,15 +53,15 @@
                     </tr>
                     <tr>
                         <th>Emergency Contact Name</th>
-                        <td><input th:field="${emergencyContact.namaEmergencyContact}" /></td>
+                        <td><input th:field="${pasien.emergencyContact.namaEmergencyContact}" /></td>
                     </tr>
                     <tr>
                         <th>Emergency Contact NIK</th>
-                        <td><input th:field="${emergencyContact.NIKEmergencyContact}"/></td>
+                        <td><input th:field="${pasien.emergencyContact.NIKEmergencyContact}"/></td>
                     </tr>
                     <tr>
                         <th>Emergency Contact Phone</th>
-                        <td><input th:field="${emergencyContact.noTelp}"/></td>
+                        <td><input th:field="${pasien.emergencyContact.noTelp}"/></td>
                     </tr>
                 </thead>
                 <tbody></tbody>

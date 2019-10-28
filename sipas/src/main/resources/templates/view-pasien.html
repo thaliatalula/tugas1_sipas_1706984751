@@ -8,49 +8,71 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
+    <br>
     <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Detail Data Pasien</div>
+                <div class="card-header bg-dark text-white">  Detail Data Pasien</div>
                 <div class="card-body">
                     <table class="table order-list">
                         <tbody>
-                            <h3 th:text="'Nama: ' + ${pasien.namaPasien}"></h3>
-                            <h3 th:text="'NIK: ' + ${pasien.nikPasien}"></h3>
-                            <h3 th:text="'Kode: ' + ${pasien.jenisKelamin}"></h3>
-                            <h3 th:text="'Jenis Kelamin: ' + ${pasien.kodePasien}"></h3>
-                            <h3 th:text="'Tanggal Lahir: ' + ${pasien.tempatLahir}"></h3>
-                            <h3 th:text="'Tempat Lahir: ' + ${pasien.tglLahir}"></h3>
-                            <h3 th:text="'Emergency Contact: ' + ${pasien.emergencyContact.noTelp}"></h3>
+                            <tr>
+                                <th>
+                                    <a th:href="@{/}"> Kembali ke beranda </a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Nama</td>
+                                <td th:text="${pasien.namaPasien}"></td>
+                            </tr>
+                            <tr>
+                                <td>NIK</td>
+                                <td th:text="${pasien.nikPasien}"></td>
+                            </tr>
+                            <tr>
+                                <td>Kode</td>
+                                <td th:text="${pasien.kodePasien}"></td>
+                            </tr>
+                            <tr>
+                                <td>Jenis Kelamin</td>
+                                <td th:text="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Lahir</td>
+                                <td th:text="${pasien.tglLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tempat Lahir</td>
+                                <td th:text="${pasien.tempatLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Contact</td>
+                                <td th:text="${pasien.emergencyContact.namaEmergencyContact} + ' - ' + ${pasien.emergencyContact.NIKEmergencyContact} + ' - ' + ${pasien.emergencyContact.noTelp}"></td>
+                            </tr>
                         </tbody>
-                        <!--</div>-->
-                        <!--<thead>-->
-                        <!--<tr>-->
-                            <!--<th>No</th>-->
-                            <!--<th>Nama</th>-->
-                            <!--<th>NIK</th>-->
-                            <!--<th>Jenis Kelamin</th>-->
-                            <!--<th>Kode Pasien</th>-->
-                            <!--<th>Tempat Lahir</th>-->
-                            <!--<th>Tanggal Lahir</th>-->
-                            <!--<th>Telepon Emergency</th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.namaPasien}"></td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.NIKPasien}">k</td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.jenisKelamin}"></td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.kodePasien}"></td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.tglLahir}"></td>-->
-                            <!--<td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>-->
-                        <!--</tbody>-->
                     </table>
                 </div>
             </div>
         </div>
     </div>
+        <br>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white"> Asuransi Milik Pasien </div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <tbody>
+                        <tr th:each="pasienAsuransi, iterationStatus : ${listAsuransi}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${pasienAsuransi.asuransi.namaAsuransi}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

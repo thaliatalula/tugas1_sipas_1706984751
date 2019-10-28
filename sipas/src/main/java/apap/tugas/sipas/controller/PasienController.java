@@ -32,7 +32,6 @@ public class PasienController {
         //add model pasien untuk dirender
         model.addAttribute("listPasien", listPasien);
         return "beranda";
-
     }
 
     //add pasien
@@ -40,30 +39,41 @@ public class PasienController {
     public String addPasienForm(Model model){
         PasienModel pasien = new PasienModel();
         EmergencyContactModel emergencyContact = new EmergencyContactModel();
+        pasien.setEmergencyContact(emergencyContact);
+        List<PasienAsuransiModel> listPasienAsuransi = new ArrayList<>();
+        pasien.setListPasienAsuransi(listPasienAsuransi);
+        PasienAsuransiModel pasienAsuransi = new PasienAsuransiModel();
+        pasien.getListPasienAsuransi().add(pasienAsuransi);
         List<AsuransiModel> listAsuransi = asuransiService.getAsuransiList();
-        model.addAttribute("listAsuransi", listAsuransi);
-        model.addAttribute("emergencyContact", emergencyContact);
+
         model.addAttribute("pasien", pasien);
+        model.addAttribute("emergencyContact", emergencyContact);
+        model.addAttribute("listAsuransi", listAsuransi);
         return "form-add-pasien";
     }
 
     @RequestMapping(value = "/pasien/tambah/berhasil", method = RequestMethod.POST)
     public String submitPasien(@ModelAttribute PasienModel pasien, @ModelAttribute EmergencyContactModel emergencyContact, Model model){
         pasien.buatKode(pasien);
-        pasien.setEmergencyContact(emergencyContact);
+        for (PasienAsuransiModel pasienAsuransiModel : pasien.getListPasienAsuransi()){
+            pasienAsuransiModel.setPasien(pasien);
+        }
         pasienService.addPasien(pasien);
         model.addAttribute("pasien", pasien);
         return "add-pasien";
     }
 
-    @RequestMapping(value="/pasien/tambah", params={"tambahAsuransi"}, method = RequestMethod.POST)
-    public String tambahAsuransi(PasienModel pasien, PasienAsuransiModel asuransi, BindingResult bindingResult, Model model) {
+    @RequestMapping(value="/pasien/tambah/berhasil", params={"tambahAsuransi"}, method = RequestMethod.POST)
+    public String addRowAsuransi(PasienModel pasien, PasienAsuransiModel pasienAsuransi, BindingResult bindingResult, Model model) {
         if (pasien.getListPasienAsuransi() ==  null) {
-            pasien.setListPasienAsuransi(new ArrayList<PasienAsuransiModel>());
+            pasien.setListPasienAsuransi(new ArrayList<>());
         }
-        pasien.getListPasienAsuransi().add(asuransi);
-        model.addAttribute("asuransi", asuransi);
-        return "add-pasien";
+        pasienAsuransi.setPasien(pasien);
+        pasien.getListPasienAsuransi().add(pasienAsuransi);
+        List<AsuransiModel> asuransiList = asuransiService.getAsuransiList();
+        model.addAttribute("pasien", pasien);
+        model.addAttribute("listAsuransi", asuransiList);
+        return "form-add-pasien";
     }
 
     @RequestMapping(value="/pasien", method = RequestMethod.GET)
@@ -71,17 +81,24 @@ public class PasienController {
             @RequestParam(value = "nikPasien") String nikPasien, Model model
     ){
         PasienModel pasien = pasienService.getPasienByNikPasien(nikPasien).get();
+        List<PasienAsuransiModel> listAsuransi = pasien.getListPasienAsuransi();
         model.addAttribute("pasien", pasien);
+        model.addAttribute("listAsuransi", listAsuransi);
         return "view-pasien";
     }
 
-//    //lihat pasien berdasarkan NIK pasien
-//    @RequestMapping(path = "/pasien?nikPasien={NIKPasien}")
-//    public String viewPasien(
-//            @RequestParam(value="NIKPasien") String NIKPasien, Model model
-//    ){
-//        PasienModel pasien = pasienService.getPasienByNIKPasien(NIKPasien).get();
-//        model.addAttribute("pasien", pasien);
-//        return "view-pasien";
-//    }
+    @RequestMapping(value="/pasien/ubah/{nikPasien}", method = RequestMethod.GET)
+    public String changePasienForm(@PathVariable String nikPasien, Model model){
+        PasienModel existPasien = pasienService.getPasienByNikPasien(nikPasien).get();
+        model.addAttribute("pasien", existPasien);
+        return "form-change-pasien";
+    }
+
+    @RequestMapping(value="/pasien/ubah/{nikPasien}", method = RequestMethod.POST)
+    public String submitChangePasien(@PathVariable String nikPasien, @ModelAttribute PasienModel pasienModel, Model model){
+        PasienModel newPasien = pasienService.changePasien(pasienModel);
+        model.addAttribute("pasien", newPasien);
+        return "change-pasien";
+    }
 }
+

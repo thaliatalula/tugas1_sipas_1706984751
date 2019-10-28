@@ -12,7 +12,6 @@ import java.util.List;
 public class DiagnosisPenyakitModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long idPenyakit;
 
     @NotNull

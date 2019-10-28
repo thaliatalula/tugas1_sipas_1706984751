@@ -12,4 +12,6 @@ public interface PasienService {
     void addPasien(PasienModel pasien);
     //method untuk melihat data pasien sesuai nik
     Optional<PasienModel> getPasienByNikPasien(String nikPasien);
+    //method untuk ganti data pasien
+    PasienModel changePasien(PasienModel pasienModel);
 }
