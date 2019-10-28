@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>404 Internal Server Error</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar(content = 'Error 500')"></nav>
+<h2>Terdapat kesalahan pada HTML file anda.</h2>
+</body>
+</html>
