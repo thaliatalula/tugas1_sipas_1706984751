@@ -26,7 +26,13 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" th:href="@{/}"> Beranda <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link active" th:href="@{/diagnosis-penyakit-all}"> Diagnosis Penyakit <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" th:href="@{/}"> Cari Pasien <span class="sr-only">(current)</span></a>
+            <li class="dropdown">
+                <a th:href="@{#}" class="dropdown-toggle nav-item nav-link active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Cari Pasien</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Cari Pasien Berdasarkan Asuransi dan/atau Diagnosis Penyakit</a></li>
+                    <li><a href="#">Cari Pasien Pada Diagnosis</a></li>
+                </ul>
+            </li>
         </div>
     </div>
 </nav>
