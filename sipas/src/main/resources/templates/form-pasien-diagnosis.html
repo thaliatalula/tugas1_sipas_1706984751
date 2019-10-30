@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Diagnosis Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">  Detail Data Pasien</div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <tbody>
+                        <tr>
+                            <th>
+                                <a th:href="@{/}"> Kembali ke beranda </a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Nama</td>
+                            <td th:text="${pasien.namaPasien}"></td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td th:text="${pasien.nikPasien}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kode</td>
+                            <td th:text="${pasien.kodePasien}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td th:text="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td th:text="${pasien.tglLahir}"></td>
+                        </tr>
+                        <tr>
+                            <td>Tempat Lahir</td>
+                            <td th:text="${pasien.tempatLahir}"></td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Contact</td>
+                            <td th:text="${pasien.emergencyContact.namaEmergencyContact} + ' - ' + ${pasien.emergencyContact.NIKEmergencyContact} + ' - ' + ${pasien.emergencyContact.noTelp}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form th:action="@{/pasien/{nikPasien}(nikPasien=${pasien.nikPasien})} + '/tambah-diagnosis'" th:object="${pasien}" method="POST">
+                    <select th:field="${pasienDiagnosisPenyakit.diagnosisPenyakit}">
+                        <option th:value="'pilih'" selected> --Pilih Diagnosis Penyakit-- </option>
+                        <option th:each="diagnosis: ${listDiagnosisPenyakit}" th:text="${diagnosis.namaPenyakit}" th:value="${diagnosis.idPenyakit}"></option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Tambah Diagnosis Penyakit Pasien</button>
+                </form>
+
+                <div class="card">
+                    <div class="card-header bg-dark text-white"> Diagnosis Penyakit Milik Pasien </div>
+                    <div class="card-body">
+                        <table class="table order-list">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">No</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Tanggal Terdiagnosis</th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="pasienDiagnosisPenyakit, iterationStatus : ${pasien.listPasienDiagnosisPenyakit}">
+                                <td th:text="${iterationStatus.count}" style="text-align: center"></td>
+                                <td th:text="${pasienDiagnosisPenyakit.diagnosisPenyakit.namaPenyakit}" style="text-align: center"></td>
+                                <td th:text="${pasienDiagnosisPenyakit.tanggalDiagnosis}" style="text-align: center"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

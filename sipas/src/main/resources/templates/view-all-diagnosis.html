@@ -35,16 +35,17 @@
                             <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
                             <td style="text-align: center;" th:text="${diagnosis.namaPenyakit}"></td>
                             <td style="text-align: center;" th:text="${diagnosis.kodePenyakit}"></td>
-                            <td style="text-align: center;">BELOOMMM</td>
+                            <td style="text-align: center;" th:text="${diagnosis.listPasienDiagnosisPenyakit.size()}"></td>
                             <td><button class="btn btn-primary">
                                 <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosis.idPenyakit})}" methods="GET" style="color: white">Lihat</a>
                             </button></td>
                             <td><button class="btn btn-dark">
                                 <a th:href="@{/}" style="color: white">Ubah</a>
                             </button></td>
-                            <td><button class="btn btn-danger">
-                                <a th:href="@{/}" style="color: white">Hapus</a>
-                            </button></td>
+                            <td><form th:action="@{/diagnosis-penyakit/hapus/{idPenyakit}(idPenyakit=${diagnosis.idPenyakit})}" th:object="${diagnosisPenyakit}" method="POST">
+                                <input type="hidden" th:value="${diagnosis.idPenyakit}"/>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form></td>
                         </tr>
                         </tbody>
                     </table>

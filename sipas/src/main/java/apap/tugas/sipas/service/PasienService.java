@@ -14,4 +14,5 @@ public interface PasienService {
     Optional<PasienModel> getPasienByNikPasien(String nikPasien);
     //method untuk ganti data pasien
     PasienModel changePasien(PasienModel pasienModel);
+//    List<PasienModel> findAllPasienByIdPenyakit(Long idPenyakit);
 }

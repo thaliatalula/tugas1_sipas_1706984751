@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <table class="table order-list">
                             <tbody>
-                            <tr th:each="pasienDiagnosis, iterationStatus : ${listPasienDiagnosis}">
+                            <tr th:each="pasienDiagnosis, iterationStatus : ${listPenyakit}">
                                 <td th:text="${iterationStatus.count}"></td>
                                 <td th:text="${pasienDiagnosis.pasien.namaPasien} + ' - Kode:' + ${pasienDiagnosis.pasien.kodePasien}"></td>
                             </tr>

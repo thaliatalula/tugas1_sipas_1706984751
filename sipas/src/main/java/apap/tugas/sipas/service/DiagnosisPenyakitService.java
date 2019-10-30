@@ -10,6 +10,10 @@ public interface DiagnosisPenyakitService {
     List<DiagnosisPenyakitModel> getDiagnosisList();
     //method untuk melihat data diagnosis penyakit sesuai id
     Optional<DiagnosisPenyakitModel> getDiagnosisByIdPenyakit(Long idPenyakit);
+//    Optional<DiagnosisPenyakitModel> getDiagnosisByIdDiagnosis(Long idDiagnosis);
     //method untuk menambah diagnosis penyakit baru
-    void addDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyaki);
+    void addDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakit);
+    //method untuk menghapus diagnosis penyakit
+    void deleteDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakit);
+
 }

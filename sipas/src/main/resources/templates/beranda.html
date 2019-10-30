@@ -38,20 +38,21 @@
                             <tr th:each="pasien, iterationStatus : *{listPasien}">
                                 <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
                                 <td style="text-align: center;" th:text="${pasien.namaPasien}"></td>
-                                <td style="text-align: center;" th:text="${pasien.nikPasien}"></td>
+                                <td style="text-align: center;" th:text="${pasien.nikPasien}" th:value="${pasien.nikPasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></td>
                                 <td style="text-align: center;" th:text="${pasien.kodePasien}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>
                                 <td style="text-align: center;" th:text="${pasien.tglLahir}"></td>
                                 <td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>
                                 <td><button class="btn btn-dark">
-                                    <a th:action="@{/}" methods="GET" style="color: white">Tambah Diagnosis</a>
+                                    <a th:href="@{/pasien/{nikPasien}(nikPasien=${pasien.nikPasien})} + '/tambah-diagnosis'" style="color: white">Tambah Diagnosis</a>
+<!--                                    <a th:href="@{/pasien/${pasien.nikPasien}} + '/tambah-diagnosis'" style="color: white">Tambah Diagnosis</a>-->
                                 </button></td>
                                 <td><button class="btn btn-primary">
                                     <a th:href="@{/pasien(nikPasien=${pasien.nikPasien})}" style="color: white">Lihat</a>
                                 </button></td>
                                 <td><button class="btn btn-dark">
-                                    <a th:href="@{/pasien/ubah/} + ${pasien.nikPasien   }" style="color: white">Ubah</a>
+                                    <a th:href="@{/pasien/ubah/} + ${pasien.nikPasien}" style="color: white">Ubah</a>
                                 </button></td>
                                 <td><button class="btn btn-danger">
                                     <a th:href="@{/}" style="color: white">Hapus</a>

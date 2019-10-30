@@ -2,6 +2,7 @@ package apap.tugas.sipas.service;
 
 import apap.tugas.sipas.model.PasienModel;
 import apap.tugas.sipas.repository.PasienDb;
+import org.hibernate.cfg.annotations.Nullability;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -31,20 +32,32 @@ public class PasienServiceImpl implements PasienService{
         return pasienDb.findByNikPasien(nikPasien);
     }
 
+//    @Override
+//    public List<PasienModel> findAllPasienByIdPenyakit(Long idPenyakit){
+//        return pasienDb.findByDiagnosisPenyakitIdPenyakit(idPenyakit);
+//    }
+
     @Override
     public PasienModel changePasien(PasienModel pasienModel){
         PasienModel targetPasien = pasienDb.findByNikPasien(pasienModel.getNikPasien()).get();
         Date tglSblm = targetPasien.getTglLahir();
+        try {
+            targetPasien.setNamaPasien(pasienModel.getNamaPasien());
+            targetPasien.setTglLahir(pasienModel.getTglLahir());
+            targetPasien.setTempatLahir(pasienModel.getTempatLahir());
+            if (tglSblm != pasienModel.getTglLahir()) {
+                targetPasien.buatKode(pasienModel);
+            }
 
-        targetPasien.setNamaPasien(pasienModel.getNamaPasien());
-        targetPasien.setJenisKelamin(pasienModel.getJenisKelamin());
-        targetPasien.setTglLahir(pasienModel.getTglLahir());
-        targetPasien.setTempatLahir(pasienModel.getTempatLahir());
-        if (tglSblm != pasienModel.getTglLahir()){
-            targetPasien.buatKode(pasienModel);
+            pasienDb.save(targetPasien);
+            return targetPasien;
+        }catch (NullPointerException e){
+            return null;
         }
-
-        pasienDb.save(targetPasien);
-        return targetPasien;
     }
+
+//    @Override
+//    public List<PasienModel> findAllPasienByIdPenyakit(Long idPenyakit){
+//        return pasienDb.findByIdPenyakit(idPenyakit);
+//    }
 }

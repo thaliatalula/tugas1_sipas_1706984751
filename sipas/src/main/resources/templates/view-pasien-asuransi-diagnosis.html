@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <br>
+    <center><h2>Sistem Informasi Pasien</h2></center>
+    <br>
+    <h3>Masukkan Asuransi</h3>
+
+    <form th:action="@{/pasien/cari(idAsuransi=${asuransi.idAsuransi}&idDiagnosis=${diagnosisPenyakit.idPenyakit})}" th:object="${pasien}" method="POST">
+        <select th:field="${pasienDiagnosisPenyakit.diagnosisPenyakit}">
+            <option th:value="'pilih'" selected> --Pilih Diagnosis Penyakit-- </option>
+            <option th:each="diagnosis: ${listDiagnosisPenyakit}" th:text="${diagnosis.namaPenyakit}" th:value="${diagnosis.idPenyakit}"></option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Cari Pasien</button>
+    </form>
+
+</body>
+</html>

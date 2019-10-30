@@ -17,15 +17,15 @@
                 <thead>
                 <tr>
                     <th>Nama</th>
-                    <td><input th:value="${pasien.namaPasien}" th:field="${pasien.namaPasien}"/></td>
+                    <td><input th:value="${pasien.namaPasien}" name="namaPasien"/></td>
                 </tr>
                 <tr>
                     <th>NIK</th>
-                    <td><input th:value="${pasien.nikPasien}" th:filed="${pasien.nikPasien}" disabled/></td>
+                    <td><input th:value="${pasien.nikPasien}" name="nikPasien" readonly/></td>
                 </tr>
                 <tr>
                     <th>Jenis Kelamin</th>
-                    <td><input th:value="${pasien.jenisKelamin}" th:field="${pasien.jenisKelamin}"/></td>
+                    <td><input th:value="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'" th:field="${pasien.jenisKelamin}" name="jenisKelamin"  readonly/></td>
                 </tr>
                 <tr>
                     <th>Tanggal Lahir</th>
@@ -33,24 +33,19 @@
                 </tr>
                 <tr>
                     <th>Tempat Lahir</th>
-                    <td><input th:value="${pasien.tempatLahir}" th:field="${pasien.tempatLahir}"/></td>
-                </tr>
-                <tr>
-                    <th>Asuransi</th>
-                    <td>APA YAA</td>
-<!--                    <td><input th:value="${pasien.asuransi}"></td>-->
+                    <td><input th:value="${pasien.tempatLahir}" name="tempatLahir"/></td>
                 </tr>
                 <tr>
                     <th>Emergency Contact Name</th>
-                    <td><input th:value="${pasien.emergencyContact.namaEmergencyContact}" th:field="${pasien.emergencyContact.namaEmergencyContact}" /></td>
+                    <td><input th:value="${pasien.emergencyContact.namaEmergencyContact}" name="namaEmergencyContact" readonly/></td>
                 </tr>
                 <tr>
                     <th>Emergency Contact NIK</th>
-                    <td><input th:value="${pasien.emergencyContact.NIKEmergencyContact}" th:field="${pasien.emergencyContact.NIKEmergencyContact}"/></td>
+                    <td><input th:value="${pasien.emergencyContact.NIKEmergencyContact}" name="NIKEmergencyContact"  readonly/></td>
                 </tr>
                 <tr>
                     <th>Emergency Contact Phone</th>
-                    <td><input th:value="${pasien.emergencyContact.noTelp}" th:field="${pasien.emergencyContact.noTelp}"/></td>
+                    <td><input th:value="${pasien.emergencyContact.noTelp}" name="noTelp"  readonly/></td>
                 </tr>
                 </thead>
                 <tbody></tbody>

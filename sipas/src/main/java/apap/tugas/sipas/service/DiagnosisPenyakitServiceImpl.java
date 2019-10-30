@@ -25,8 +25,19 @@ public class DiagnosisPenyakitServiceImpl implements DiagnosisPenyakitService{
         return diagnosisPenyakitDb.findByIdPenyakit(idPenyakit);
     }
 
+//    @Override
+//    public Optional<DiagnosisPenyakitModel> getDiagnosisByIdDiagnosis(Long idPenyakit){
+//        return diagnosisPenyakitDb.findByIdPenyakit(idPenyakit);
+//    }
+
     @Override
     public void addDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakit){
         diagnosisPenyakitDb.save(diagnosisPenyakit);
     }
+
+    @Override
+    public void deleteDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakit){
+        diagnosisPenyakitDb.delete(diagnosisPenyakit);
+    }
+
 }

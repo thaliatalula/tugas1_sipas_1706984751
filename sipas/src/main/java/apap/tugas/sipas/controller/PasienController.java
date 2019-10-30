@@ -1,10 +1,9 @@
 package apap.tugas.sipas.controller;
 
-import apap.tugas.sipas.model.AsuransiModel;
-import apap.tugas.sipas.model.EmergencyContactModel;
-import apap.tugas.sipas.model.PasienAsuransiModel;
-import apap.tugas.sipas.model.PasienModel;
+import apap.tugas.sipas.model.*;
 import apap.tugas.sipas.service.AsuransiService;
+import apap.tugas.sipas.service.DiagnosisPenyakitService;
+import apap.tugas.sipas.service.PasienDiagnosisService;
 import apap.tugas.sipas.service.PasienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,6 +23,12 @@ public class PasienController {
 
     @Autowired
     private AsuransiService asuransiService;
+
+    @Autowired
+    private DiagnosisPenyakitService diagnosisPenyakitService;
+
+    @Autowired
+    private PasienDiagnosisService pasienDiagnosisService;
 
     //beranda
     @RequestMapping("/")
@@ -94,11 +100,48 @@ public class PasienController {
         return "form-change-pasien";
     }
 
-    @RequestMapping(value="/pasien/ubah/{nikPasien}", method = RequestMethod.POST)
-    public String submitChangePasien(@PathVariable String nikPasien, @ModelAttribute PasienModel pasienModel, Model model){
+    @RequestMapping(value="/pasien/ubah/berhasil", method = RequestMethod.POST)
+    public String submitChangePasien(@ModelAttribute PasienModel pasienModel, Model model){
         PasienModel newPasien = pasienService.changePasien(pasienModel);
         model.addAttribute("pasien", newPasien);
         return "change-pasien";
     }
+
+    @RequestMapping(value="/pasien/{nikPasien}/tambah-diagnosis", method = RequestMethod.GET)
+    public String addPasienDiagnosisForm(@PathVariable String nikPasien, Model model){
+        PasienModel pasien = pasienService.getPasienByNikPasien(nikPasien).get();
+        PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit = new PasienDiagnosisPenyakitModel();
+        List<DiagnosisPenyakitModel> listDiagnosisPenyakit = diagnosisPenyakitService.getDiagnosisList();
+        pasien.getListPasienDiagnosisPenyakit();
+
+        model.addAttribute("pasien", pasien);
+        model.addAttribute("pasienDiagnosisPenyakit", pasienDiagnosisPenyakit);
+        model.addAttribute("listDiagnosisPenyakit", listDiagnosisPenyakit);
+
+        return "form-pasien-diagnosis";
+    }
+
+    @RequestMapping(value="pasien/{nikPasien}/tambah-diagnosis", method = RequestMethod.POST)
+    public String addPasienDiagnosisSubmit(@PathVariable String nikPasien, @ModelAttribute PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit, Model model){
+        PasienModel pasien = pasienService.getPasienByNikPasien(nikPasien).get();
+        pasienDiagnosisPenyakit.setPasien(pasien);
+        Date date = new Date();
+        pasienDiagnosisPenyakit.setTanggalDiagnosis(date);
+        pasienDiagnosisService.addPasienDiagnosis(pasienDiagnosisPenyakit);
+
+        model.addAttribute("pasien", pasien);
+        model.addAttribute("pasienDiagnosisPenyakit", pasienDiagnosisPenyakit);
+        model.addAttribute("namaPenyakit1", pasienDiagnosisPenyakit.getDiagnosisPenyakit().getNamaPenyakit());
+
+        return "pasien-diagnosis";
+    }
+
+//    @RequestMapping(value="pasien/cari", method = RequestMethod.GET)
+//    public String cariPasien @RequestParam(value = "nikPasien") String nikPasien, Model model
+//    ){
+//
+//    @RequestParam Long idAsuransi, Long idPenyakit, @ModelAttribute PasienAsuransiModel pasienAsuransi, @ModelAttribute PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit, Model model){
+//
+//    }
 }
 
