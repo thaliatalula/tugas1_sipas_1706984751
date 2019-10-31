@@ -8,10 +8,10 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:align="center">
     <div class="row">
-        <div class="col-md-12">
-            <h2>Masukkan Diagnosis</h2>
+        <div class="col-md-12" th:align="center">
+            <br><h2>Masukkan Diagnosis</h2><br>
             <form th:action="@{/pasien/cari/lakilaki-perempuan}" method="GET">
                 <select th:name="idPenyakit">
                     <option th:value="'pilih'" selected> --Pilih Diagnosis Penyakit-- </option>

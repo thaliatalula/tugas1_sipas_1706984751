@@ -8,8 +8,8 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container">
-    <div class="col-md-6">
+<div class="container" th:align="center">
+    <div class="col-md-6" th:align="center">
         <br>
         <h3> Ubah Pasien </h3>
         <form th:action="@{/pasien/ubah/berhasil}" th:object="${pasien}" method="POST">
@@ -25,7 +25,13 @@
                 </tr>
                 <tr>
                     <th>Jenis Kelamin</th>
-                    <td><input th:value="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'" th:field="${pasien.jenisKelamin}" name="jenisKelamin"  readonly/></td>
+                    <td>
+                    <select type="text" name="jenisKelamin" th:value="${pasien.jenisKelamin}" th:field="${pasien.jenisKelamin}" disabled>
+                        <option th:value="1">Laki laki</option>
+                        <option th:value="2">Perempuan</option>
+                    </select>
+                    </td>
+<!--                    <td><input th:value="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'" th:field="${pasien.jenisKelamin}" name="jenisKelamin"  readonly/></td>-->
                 </tr>
                 <tr>
                     <th>Tanggal Lahir</th>

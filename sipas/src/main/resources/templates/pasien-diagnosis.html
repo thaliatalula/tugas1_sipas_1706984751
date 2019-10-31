@@ -8,6 +8,7 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h2 th:text="'Diagnosis penyakit ' + ${namaPenyakit1} + ' berhasil ditambahkan ke pasien ' + ${pasien.namaPasien} + ' pada tanggal ' + ${pasienDiagnosisPenyakit.tanggalDiagnosis}"></h2>
+<br><br>
+<h2 th:text="'Diagnosis penyakit ' + ${namaPenyakit1} + ' berhasil ditambahkan ke pasien ' + ${pasien.namaPasien} + ' pada tanggal ' + ${pasienDiagnosisPenyakit.tanggalDiagnosis}" style="text-align: center"></h2>
 </body>
 </html>

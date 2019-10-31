@@ -8,7 +8,7 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:align="center">
     <br>
     <center><h2>Sistem Informasi Pasien</h2></center>
     <br>
@@ -17,7 +17,8 @@
     </button>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" th:align="center">
             <div class="card">
                 <div class="card-header bg-dark text-white">Daftar Diagnosis Penyakit</div>
                 <div class="card-body">
@@ -39,9 +40,9 @@
                             <td><button class="btn btn-primary">
                                 <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosis.idPenyakit})}" methods="GET" style="color: white">Lihat</a>
                             </button></td>
-                            <td><button class="btn btn-dark">
-                                <a th:href="@{/}" style="color: white">Ubah</a>
-                            </button></td>
+<!--                            <td><button class="btn btn-dark">-->
+<!--                                <a th:href="@{/}" style="color: white">Ubah</a>-->
+<!--                            </button></td>-->
                             <td><form th:action="@{/diagnosis-penyakit/hapus/{idPenyakit}(idPenyakit=${diagnosis.idPenyakit})}" th:object="${diagnosisPenyakit}" method="POST">
                                 <input type="hidden" th:value="${diagnosis.idPenyakit}"/>
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -52,6 +53,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-2"></div>
     </div>
     <br>
 </div>

@@ -9,9 +9,10 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <br>
-    <div class="container-fluid">
+    <div class="container-fluid" th:align="center">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-dark text-white">  Detail Data Pasien</div>
                 <div class="card-body">
@@ -55,12 +56,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
         <br>
-    <div class="container-fluid">
+    <div class="container-fluid" th:align="center">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" th:align="center">
+            <div class="card" th:align="center">
                 <div class="card-header bg-dark text-white"> Asuransi Milik Pasien </div>
                 <div class="card-body">
                     <table class="table order-list">
@@ -73,6 +76,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
 </body>
 </html>

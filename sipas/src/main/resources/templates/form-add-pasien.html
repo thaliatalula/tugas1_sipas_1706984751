@@ -8,9 +8,9 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <div class="container">
-        <div class="col-md-6">
-        <h3> Tambah Pasien </h3>
+    <div class="container" th:align="center">
+        <div class="col-md-6" th:align="center">
+        <br><br><h3> Tambah Pasien </h3>
         <form th:action="@{/pasien/tambah/berhasil}" th:object="${pasien}" method="POST">
             <input type="hidden" th:field="${pasien.idPasien}"/>
             <table class="table order-list">
@@ -48,7 +48,7 @@
                                 </option>
                             </select>
                             <br><br>
-                            <button class="btn btn-light" name="tambahAsuransi"/> Tambah Asuransi </button>
+                            <button class="btn btn-primary" name="tambahAsuransi"/> Tambah Asuransi </button>
                         </td>
                     </tr>
                     <tr>
@@ -67,6 +67,7 @@
                 <tbody></tbody>
             </table>
             <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
+            <br>
         </form>
     </div>
     </div>

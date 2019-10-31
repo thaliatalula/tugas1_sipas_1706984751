@@ -23,4 +23,9 @@ public class PasienDiagnosisServiceImpl implements  PasienDiagnosisService{
     public List<PasienDiagnosisPenyakitModel> getPasienJenisKelaminAndDiagnosisPenyakitIdPenyakit (Integer jenisKelamin, Long idPenyakit){
         return pasienDiagnosisDb.findByPasienJenisKelaminAndDiagnosisPenyakitIdPenyakit(jenisKelamin, idPenyakit);
     }
+
+    @Override
+    public List<PasienDiagnosisPenyakitModel> getDiagnosisPenyakitIdPenyakit(Long idPenyakit){
+        return pasienDiagnosisDb.findByDiagnosisPenyakitIdPenyakit(idPenyakit);
+    }
 }

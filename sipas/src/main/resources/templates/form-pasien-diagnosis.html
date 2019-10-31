@@ -9,9 +9,10 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <br>
-<div class="container-fluid">
+<div class="container-fluid" th:align="center">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" th:align="center">
             <div class="card">
                 <div class="card-header bg-dark text-white">  Detail Data Pasien</div>
                 <div class="card-body">
@@ -55,11 +56,13 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
     <br>
-    <div class="container-fluid">
+    <div class="container-fluid" th:align="center">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" th:align="center">
                 <form th:action="@{/pasien/{nikPasien}(nikPasien=${pasien.nikPasien})} + '/tambah-diagnosis'" th:object="${pasien}" method="POST">
                     <select th:field="${pasienDiagnosisPenyakit.diagnosisPenyakit}">
                         <option th:value="'pilih'" selected> --Pilih Diagnosis Penyakit-- </option>
@@ -90,6 +93,7 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
 </body>

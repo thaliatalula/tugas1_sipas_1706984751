@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PasienDiagnosisDb extends JpaRepository<PasienDiagnosisPenyakitModel, Long> {
     List<PasienDiagnosisPenyakitModel> findByPasienJenisKelaminAndDiagnosisPenyakitIdPenyakit (Integer jenisKelamin, Long idPenyakit);
+    List<PasienDiagnosisPenyakitModel> findByDiagnosisPenyakitIdPenyakit(Long idPenyakit);
 }
