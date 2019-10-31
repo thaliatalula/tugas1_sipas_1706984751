@@ -136,12 +136,41 @@ public class PasienController {
         return "pasien-diagnosis";
     }
 
-//    @RequestMapping(value="pasien/cari", method = RequestMethod.GET)
-//    public String cariPasien @RequestParam(value = "nikPasien") String nikPasien, Model model
-//    ){
-//
-//    @RequestParam Long idAsuransi, Long idPenyakit, @ModelAttribute PasienAsuransiModel pasienAsuransi, @ModelAttribute PasienDiagnosisPenyakitModel pasienDiagnosisPenyakit, Model model){
-//
-//    }
+    @RequestMapping(value="pasien/cari", method = RequestMethod.GET)
+    public String cariPasien(
+            @RequestParam(value = "idAsuransi") Long idAsuransi,
+            @RequestParam(value = "idPenyakit") Long idPenyakit, Model model
+    ){
+        List<PasienModel> listPasien = pasienService.getPasienList();
+        model.addAttribute("listPasien", listPasien);
+
+
+
+
+    }
+
+    @RequestMapping(value="/pasien/cari/lakilaki-perempuan", method = RequestMethod.GET)
+    public String jumlahPasien(
+            @RequestParam(value = "idPenyakit") Long idPenyakit, Model model
+    ){
+        List<DiagnosisPenyakitModel> listDiagnosis = diagnosisPenyakitService.getDiagnosisList();
+        model.addAttribute("listDiagnosis", listDiagnosis);
+
+        if(idPenyakit == 0){
+            return "form-jumlah-pasien";
+        }else {
+            List<PasienDiagnosisPenyakitModel> pasienLaki = pasienDiagnosisService.getPasienJenisKelaminAndDiagnosisPenyakitIdPenyakit(1, idPenyakit);
+            List<PasienDiagnosisPenyakitModel> pasienPerempuan = pasienDiagnosisService.getPasienJenisKelaminAndDiagnosisPenyakitIdPenyakit(2, idPenyakit);
+            Integer jumlahLaki = pasienLaki.size();
+            Integer jumlahPerempuan = pasienPerempuan.size();
+            DiagnosisPenyakitModel diagnosisPenyakit = diagnosisPenyakitService.getDiagnosisByIdPenyakit(idPenyakit).get();
+            model.addAttribute("diagnosisPenyakit", diagnosisPenyakit);
+            model.addAttribute("jumlahLaki", jumlahLaki);
+            model.addAttribute("jumlahPerempuan", jumlahPerempuan);
+            return "form-tabel-jumlah-pasien";
+        }
+    }
+
+
 }
 

@@ -29,8 +29,9 @@
             <li class="dropdown">
                 <a th:href="@{#}" class="dropdown-toggle nav-item nav-link active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Cari Pasien</span> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Cari Pasien Berdasarkan Asuransi dan/atau Diagnosis Penyakit</a></li>
-                    <li><a href="#">Cari Pasien Pada Diagnosis</a></li>
+<!--                    /pasien/cari(idAsuransi=0, idDiagnosis=0)-->
+                    <li><a th:href="@{#}">Cari Pasien Berdasarkan Asuransi dan/atau Diagnosis Penyakit</a></li>
+                    <li><a th:href="@{/pasien/cari/lakilaki-perempuan(idPenyakit=0)}">Cari Pasien Pada Diagnosis</a></li>
                 </ul>
             </li>
         </div>
