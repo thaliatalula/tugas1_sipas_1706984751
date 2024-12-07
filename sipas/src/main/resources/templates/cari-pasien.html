@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid" th:align="center">
+    <div class="row">
+        <div class="col-md-12" th:align="center">
+            <br><br>
+            <div style="text-align: center">
+            <h2>Masukkan Asuransi</h2><br>
+            <form th:action="@{/pasien/cari}" method="GET">
+                <select th:name="idAsuransi">
+                    <option th:value="0" selected> --Pilih Asuransi-- </option>
+                    <option th:each="asuransi: ${listAsuransi}" th:text="${asuransi.namaAsuransi}" th:value="${asuransi.idAsuransi}"></option>
+                </select>
+                <select th:name="idPenyakit">
+                    <option th:value="0" selected> --Pilih Diagnosis Penyakit-- </option>
+                    <option th:each="diagnosis: ${listDiagnosis}" th:text="${diagnosis.namaPenyakit}" th:value="${diagnosis.idPenyakit}"></option>
+                </select>
+                <button type="submit" class="btn btn-primary">Cari Pasien</button>
+            </form>
+            </div>
+
+            <br>
+            <div class="card">
+                <div class="card-header bg-dark text-white">Daftar Pasien</div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Nama</th>
+                            <th style="text-align: center;">NIK</th>
+                            <th style="text-align: center;">Kode Pasien</th>
+                            <th style="text-align: center;">Tempat Lahir</th>
+                            <th style="text-align: center;">Tanggal Lahir</th>
+                            <th style="text-align: center;">Telp Emergency contact</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pasien, iterationStatus : *{listPasien}">
+                            <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
+                            <td style="text-align: center;" th:text="${pasien.namaPasien}"></td>
+                            <td style="text-align: center;" th:text="${pasien.nikPasien}" th:value="${pasien.nikPasien}"></td>
+                            <td style="text-align: center;" th:text="${pasien.kodePasien}"></td>
+                            <td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>
+                            <td style="text-align: center;" th:text="${pasien.tglLahir}"></td>
+                            <td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>View All Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid" th:align="center">
+    <br>
+    <center><h2>Sistem Informasi Pasien</h2></center>
+    <br>
+    <button class="btn btn-primary">
+        <a th:href="@{/diagnosis-penyakit/tambah}" style="color: white">Tambah Diagnosis Penyakit Baru</a>
+    </button>
+    <hr>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" th:align="center">
+            <div class="card">
+                <div class="card-header bg-dark text-white">Daftar Diagnosis Penyakit</div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Nama</th>
+                            <th style="text-align: center;">Kode</th>
+                            <th style="text-align: center;">Jumlah Pasien Terdiagnosis</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="diagnosis, iterationStatus : *{listDiagnosis}">
+                            <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
+                            <td style="text-align: center;" th:text="${diagnosis.namaPenyakit}"></td>
+                            <td style="text-align: center;" th:text="${diagnosis.kodePenyakit}"></td>
+                            <td style="text-align: center;" th:text="${diagnosis.listPasienDiagnosisPenyakit.size()}"></td>
+                            <td><button class="btn btn-primary">
+                                <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosis.idPenyakit})}" methods="GET" style="color: white">Lihat</a>
+                            </button></td>
+<!--                            <td><button class="btn btn-dark">-->
+<!--                                <a th:href="@{/}" style="color: white">Ubah</a>-->
+<!--                            </button></td>-->
+                            <td><form th:action="@{/diagnosis-penyakit/hapus/{idPenyakit}(idPenyakit=${diagnosis.idPenyakit})}" th:object="${diagnosisPenyakit}" method="POST">
+                                <input type="hidden" th:value="${diagnosis.idPenyakit}"/>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <br>
+</div>
+</body>
+</html>

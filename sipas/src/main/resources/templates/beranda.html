@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Beranda</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <br>
+    <center><h2>Sistem Informasi Pasien</h2></center>
+    <br>
+    <button class="btn btn-primary">
+        <a th:href="@{/pasien/tambah}" style="color: white">Tambah Pasien Baru</a>
+    </button>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">Daftar Pasien</div>
+                <div class="card-body">
+                    <table class="table order-list">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">No</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">NIK</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
+                                <th style="text-align: center;">Kode Pasien</th>
+                                <th style="text-align: center;">Tempat Lahir</th>
+                                <th style="text-align: center;">Tanggal Lahir</th>
+                                <th style="text-align: center;">Telepon Emergency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="pasien, iterationStatus : *{listPasien}">
+                                <td style="text-align: center;" th:text="${iterationStatus.count}"></td>
+                                <td style="text-align: center;" th:text="${pasien.namaPasien}"></td>
+                                <td style="text-align: center;" th:text="${pasien.nikPasien}" th:value="${pasien.nikPasien}"></td>
+                                <td style="text-align: center;" th:text="${pasien.jenisKelamin} == 1 ? 'Laki-laki' : 'Perempuan'"></td>
+                                <td style="text-align: center;" th:text="${pasien.kodePasien}"></td>
+                                <td style="text-align: center;" th:text="${pasien.tempatLahir}"></td>
+                                <td style="text-align: center;" th:text="${pasien.tglLahir}"></td>
+                                <td style="text-align: center;" th:text="${pasien.emergencyContact.noTelp}"></td>
+                                <td><button class="btn btn-dark">
+                                    <a th:href="@{/pasien/{nikPasien}(nikPasien=${pasien.nikPasien})} + '/tambah-diagnosis'" style="color: white">Tambah Diagnosis</a>
+<!--                                    <a th:href="@{/pasien/${pasien.nikPasien}} + '/tambah-diagnosis'" style="color: white">Tambah Diagnosis</a>-->
+                                </button></td>
+                                <td><button class="btn btn-primary">
+                                    <a th:href="@{/pasien(nikPasien=${pasien.nikPasien})}" style="color: white">Lihat</a>
+                                </button></td>
+                                <td><button class="btn btn-dark">
+                                    <a th:href="@{/pasien/ubah/} + ${pasien.nikPasien}" style="color: white">Ubah</a>
+                                </button></td>
+<!--                                <td><button class="btn btn-danger">-->
+<!--                                    <a th:href="@{/}" style="color: white">Hapus</a>-->
+<!--                                </button></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+</body>
+</html>

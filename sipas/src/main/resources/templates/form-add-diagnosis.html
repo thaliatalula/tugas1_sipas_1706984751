@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Form Add Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br><br>
+<div class="container" th:align="center">
+    <div class="col-md-5" th:align="center">
+        <h3> Tambah Data Riwayat Penyakit </h3>
+        <form th:action="@{/diagnosis-penyakit/tambah/berhasil}" th:object="${diagnosisPenyakit}" method="POST">
+            <table class="table order-list">
+                <thead>
+                <tr>
+                    <th>Nama</th>
+                    <td><input th:field="${diagnosisPenyakit.namaPenyakit}"/></td>
+                </tr>
+                <tr>
+                    <th>Kode</th>
+                    <td><input th:field="${diagnosisPenyakit.kodePenyakit}"/></td>
+                </tr>
+                </thead>
+            </table>
+            <button class="btn btn-primary" type="submit" name="submit"> Submit </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

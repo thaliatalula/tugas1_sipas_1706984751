@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title>Tambah Diagnosis Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br><br>
+<h2 th:text="'Diagnosis penyakit ' + ${namaPenyakit1} + ' berhasil ditambahkan ke pasien ' + ${pasien.namaPasien} + ' pada tanggal ' + ${pasienDiagnosisPenyakit.tanggalDiagnosis}" style="text-align: center"></h2>
+</body>
+</html>
